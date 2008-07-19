@@ -7,7 +7,7 @@
    you need by the mysql command you already know?
 
    Same goes for Java vs. Ruby. Maybe you've done Java programming for years and know that the
-   method "trim" removes whitespace from the end of a string. Wouldn't it be great to find the method
+   method "trim" removes whitespace from the ends of a string. Wouldn't it be great to find the method
    that does this in Ruby indexed by the word "trim"?
 
    ibake is a publicly editable wiki of technology documentation, indexed over and over again by
