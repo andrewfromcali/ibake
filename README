@@ -1,0 +1,14 @@
+   ibake is an Acronym for (Indexed By Already Known Example)
+   Say you know mysql really well, and are trying to get something simple done with postgres. (or
+   vice versa, you might know postgres well and need to lookup a mysql command.)
+
+   While both mysql and postgres have excellent documentation, you may not know the right term to
+   look for in the foreign technology. Wouldn't it be great if you could lookup the postgres command
+   you need by the mysql command you already know?
+
+   Same goes for Java vs. Ruby. Maybe you've done Java programming for years and know that the
+   method "trim" removes whitespace from the end of a string. Would it be great to find the method
+   that does this in Ruby indexed by the word "trim"?
+
+   ibake is a publicly editable wiki of technology documenation, indexed over and over again by
+   different terms so you can always find what you need by what you already know.
