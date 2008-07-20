@@ -19,7 +19,7 @@ def render(handler, path, values):
 def get_friendly_url(title):
     return re.sub('-+', '-', 
                   re.sub('[^\w-]', '', 
-                         re.sub('\s+', '-', title.strip())))
+                         re.sub('\s+', '-', title.strip().lower())))
 
 class NotFoundHandler(webapp.RequestHandler):
   def get(self):
@@ -35,10 +35,17 @@ class StartingPointsHandler(webapp.RequestHandler):
     render(self, 'views/starting-points/starting-points.html', {})
   def post(self):
     name=self.request.get('s').strip()
-    sp = model.StartingPoint(name=name,permalink=get_friendly_url(name))
+    permalink=get_friendly_url(name)
     
-    logging.info(sp.name);
-    logging.info(sp.permalink);
+    query = db.Query(model.StartingPoint)
+    query.filter('permalink =', permalink)
+    if query.get():
+      logging.info('there');
+    else:
+      sp = model.StartingPoint(name=name,permalink=permalink)
+      sp.put()
+      logging.info('no there');
+   
     self.redirect('/')
 
 class AnythingHandler(webapp.RequestHandler):
