@@ -8,6 +8,8 @@ def main():
     application = webapp.WSGIApplication(
                     [('/*$', ibake.RootHandler),
                      ('/404.html', ibake.NotFoundHandler),
+                     ('/site/starting-points', ibake.StartingPointsHandler),
+                     ('/site/starting-points/', ibake.StartingPointsHandler),
                      ('/(.*)', ibake.AnythingHandler)], 
                     debug=True)
     wsgiref.handlers.CGIHandler().run(application)

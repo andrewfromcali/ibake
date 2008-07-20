@@ -24,6 +24,9 @@ class RootHandler(webapp.RequestHandler):
   def get(self):
     render(self, 'views/home/index.html', {})
 
+class StartingPointsHandler(webapp.RequestHandler):
+  def get(self):
+    render(self, 'views/starting-points/starting-points.html', {})
 
 class AnythingHandler(webapp.RequestHandler):
   def get(self, path):
