@@ -1,7 +1,7 @@
 <html>
   <head>
     <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-    <link type="text/css" rel="stylesheet" href="/stylesheets/main.css" />
+    <link type="text/css" rel="stylesheet" href="/static/style.css" />
     <title>{% block title %}ibake: Indexed By Already Known Example{% endblock %}</title>
   </head>
   <body>
@@ -19,15 +19,16 @@
                     <td style="line-height: 12pt; height: 10px;">
                       <span class="pagetop">
                         <b>
-                          <a href="">ibake</a>
+                          <a href="/">ibake</a>
                         </b>
                         <img src="/images/s.gif" height="1" width="10">
-                        <a href="">link1</a> | <a href="">link2</a> | <a href="">link3</a> | <a href="">link4</a> | <a href="">link5</a>
+                        <a href="/">home</a> | <a href="/site/starting-points">starting points</a> | <a href="">link3</a> | <a href="">link4</a> | <a href="">link5</a>
                       </span>
                     </td>
                     <td style="text-align: right; padding-right: 4px;">
                       <span class="pagetop">
-                        <a href="">login</a>
+                      <!--
+                        <a href="">login</a> -->
                       </span>
                     </td>
                   </tr>
@@ -43,41 +44,7 @@
                 <tbody>
                   <tr>
                     <td class="main">
-                      ibake is an acronym for (<b>I</b>ndexed <b>B</b>y <b>A</b>lready <b>K</b>nown <b>E</b>xample)
-                      <p>
-                      Say you know <a href="http://www.mysql.com">mysql</a> really well, and are trying to get something 
-                      simple done with <a href="http://www.postgresql.org/">postgres</a>.
-                      
-                      (or vice versa, you might know postgres well and need to lookup a mysql command.)
-                      </p>
-                      <p>
-                      While both mysql and postgres have excellent documentation, you may not know the
-                      right term to look for in the foreign technology.  Wouldn't it be great if you
-                      could lookup the postgres command you need by the mysql command you already know?
-                      </p>
-                      
-                      <p>
-                      Same goes for <a href="http://java.sun.com/">Java<a/> vs. 
-                      <a href="http://www.ruby-lang.org/">Ruby</a>.  Maybe you've done Java programming for years and know
-                      that the method "trim" removes whitespace from the ends of a string.  Wouldn't it be great
-                      to find the method that does this in Ruby indexed by the word "trim"?
-                      </p>
-                      
-                      <p>
-                      ibake is a publicly editable wiki of technology documentation, indexed over and over again
-                      by different terms so you can always find what you need by what you already know.
-                      </p>
-                      
-                      <h3>Categories</h3>
-                      
-                      <ul>
-                      <li><a href="">Databases</a></li>
-                      <li><a href="">Digital Video Recorders</a></li>
-                      <li><a href="">Operating Systems</a></li>
-                      <li><a href="">Programming Languages</a></li>
-                      <li><a href="">Version Control Systems</a></li>
-                      <li><a href="">Video Editing</a></li>
-                      </ul>
+                      {% block content %}{% endblock %}
                     </td>
                   </tr>
                   <tr>
