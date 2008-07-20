@@ -28,7 +28,9 @@ class NotFoundHandler(webapp.RequestHandler):
 
 class RootHandler(webapp.RequestHandler):
   def get(self):
-    render(self, 'views/home/index.html', {})
+    query = model.StartingPoint.all()
+    query.order('permalink')
+    render(self, 'views/home/index.html', {'items': query.fetch(1000, 0) })
 
 class StartingPointsHandler(webapp.RequestHandler):
   def get(self):

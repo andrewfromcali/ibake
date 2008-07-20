@@ -28,25 +28,9 @@ by different terms so you can always find what you need by what you already know
 
 <h3>Common Starting Points</h3>
 <ul>
-<li><a href="/tag/mysql">MySQL</a></li>
-<li><a href="/tag/mysql">PostgreSQL</a></li>
-<li><a href="/tag/mysql">Java</a></li>
-<li><a href="/tag/mysql">Ruby</a></li>
-<li><a href="/tag/mysql">ActiveRecord</a></li>
-<li><a href="/tag/mysql">Hibernate</a></li>
-<li><a href="/tag/mysql">SVN</a></li>
-<li><a href="/tag/mysql">git</a></li>
-<li><a href="/tag/mysql">Cocoa</a></li>
-<li><a href="/tag/mysql">Smarty</a></li>
-<li><a href="/tag/mysql">Haml</a></li>
-<li><a href="/tag/mysql">Velocity</a></li>
-<li><a href="/tag/mysql">ERB</a></li>
-<li><a href="/tag/mysql">Linux</a></li>
-<li><a href="/tag/mysql">Mac OS</a></li>
-<li><a href="/tag/mysql">Rails</a></li>
-<li><a href="/tag/mysql">GAE</a></li>
-<li><a href="/tag/mysql">Merb</a></li>
-<li><a href="/tag/mysql">Django</a></li>
+{% for item in items %}
+<li><a href="/{{ item.permalink }}">{{ item.name }}</a></li>
+{% endfor %}
 </ul>
 
 <h3>See All Starting Points</h3>

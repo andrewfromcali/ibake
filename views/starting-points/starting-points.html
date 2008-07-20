@@ -21,6 +21,10 @@ Error: {{ error }}
 </div>
 {% endif %}
 
+{% if permalink %}
+<a href="/{{ permalink }}">{{ permalink }}</a>
+{% endif %}
+
 <p>
 <form method="POST">
 <strong>New Starting Point Name:</strong><br/>
