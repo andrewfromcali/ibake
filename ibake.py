@@ -58,6 +58,14 @@ class StartingPointsHandler(webapp.RequestHandler):
 
 class AnythingHandler(webapp.RequestHandler):
   def get(self, path):
-    print 'anything'
+    query = db.Query(model.StartingPoint)
+    logging.info(self.request.path[1:])
+    query.filter('permalink =', self.request.path[1:])
+    sp = query.get()
+    if sp:
+      render(self, 'views/items/item.html', {})   
+    else:
+      self.error(404)
+      render(self, 'views/_shared/404.html', {})    
     
   
