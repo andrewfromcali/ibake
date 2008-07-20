@@ -10,21 +10,23 @@ from google.appengine.api import users
 from google.appengine.ext import db
 from google.appengine.ext.webapp import template
 
+def render(handler, path, values):
+  path = os.path.join(os.path.dirname(__file__), path)
+  handler.response.out.write(template.render(path, values))    
+
+
 class NotFoundHandler(webapp.RequestHandler):
   def get(self):
     self.error(404)
-    print '404'
+    render(self, 'views/_shared/404.html', {})
 
 class RootHandler(webapp.RequestHandler):
   def get(self):
-    template_values = {
-     'greetings': 'test',
-     'url': 'test',
-    }
+    render(self, 'views/home/index.html', {})
 
-    path = os.path.join(os.path.dirname(__file__), 'views/home/index.html')
-    self.response.out.write(template.render(path, template_values))
 
 class AnythingHandler(webapp.RequestHandler):
   def get(self, path):
     print 'anything'
+    
+  
