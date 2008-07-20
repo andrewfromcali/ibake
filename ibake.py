@@ -40,8 +40,8 @@ class StartingPointsHandler(webapp.RequestHandler):
   def post(self):
     name=self.request.get('s').strip()
     
-    if len(name) == 0:
-      self.redirect('/site/starting-points?error=blank')
+    if len(name) == 0 or len(name) > 80:
+      self.redirect('/site/starting-points?error=size_too_big_or_too_small')
       return
     
     permalink=get_friendly_url(name)
@@ -59,13 +59,35 @@ class StartingPointsHandler(webapp.RequestHandler):
 class AnythingHandler(webapp.RequestHandler):
   def get(self, path):
     query = db.Query(model.StartingPoint)
-    logging.info(self.request.path[1:])
-    query.filter('permalink =', self.request.path[1:])
+    query.filter('permalink =', path)
     sp = query.get()
     if sp:
-      render(self, 'views/items/item.html', {})   
+      query = model.Item.all()
+      query.filter('parent_permalink =', path)
+      query.order('permalink')
+      render(self, 'views/items/item.html', {'sp': sp, 'items': query.fetch(1000, 0)})   
     else:
       self.error(404)
       render(self, 'views/_shared/404.html', {})    
+  def post(self, path):
+    name=self.request.get('s').strip()
+    query = db.Query(model.StartingPoint)
+    query.filter('permalink =', path)
+    sp = query.get()
     
+    if len(name) == 0 or len(name) > 80:
+      self.redirect(''.join([self.request.path, '?error=size_too_big_or_too_small']))
+      return
+      
+    permalink=get_friendly_url(name)
+    
+    query = db.Query(model.Item)
+    query.filter('parent_permalink =', path)
+    query.filter('permalink =', permalink)
+    if query.get():
+      self.redirect(''.join([self.request.path, '?error=duplicate']))
+    else:
+      item = model.Item(name=name,permalink=permalink,parent_permalink=path)
+      item.put()
+      self.redirect(self.request.path)
   

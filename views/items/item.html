@@ -1,6 +1,31 @@
 {% extends "../_shared/base.html" %}
 
 {% block content %}
-<h3>qewdqe</h3>
+<h3>{{ sp.name }}</h3>
+
+{% if error %}
+<div class="error">
+Error: {{ error }}  
+</div>
+{% endif %}
+
+{% if permalink %}
+<a href="/{{ permalink }}">{{ permalink }}</a>
+{% endif %}
+
+<ul>
+{% for item in items %}
+<li><a href="/{{ item.permalink }}">{{ item.name }}</a></li>
+{% endfor %}
+</ul>
+
+<p>
+<form method="POST">
+<strong>New  {{ sp.name }} Item:</strong><br/>
+<input type="textfield" name="s" size="40"/>
+<br/>
+<input type="submit" value="add new item"/>
+</form>
+</p>
 
 {% endblock %}
