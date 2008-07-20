@@ -32,21 +32,27 @@ class RootHandler(webapp.RequestHandler):
 
 class StartingPointsHandler(webapp.RequestHandler):
   def get(self):
-    render(self, 'views/starting-points/starting-points.html', {})
+    values = { 'permalink': self.request.get('p'),
+                'error' : self.request.get('error') }
+    render(self, 'views/starting-points/starting-points.html', values)
   def post(self):
     name=self.request.get('s').strip()
+    
+    if len(name) == 0:
+      self.redirect('/site/starting-points?error=blank')
+      return
+    
     permalink=get_friendly_url(name)
     
     query = db.Query(model.StartingPoint)
     query.filter('permalink =', permalink)
     if query.get():
-      logging.info('there');
+      self.redirect(''.join(['/site/starting-points?error=duplicate&p=', permalink]))
     else:
       sp = model.StartingPoint(name=name,permalink=permalink)
       sp.put()
-      logging.info('no there');
+      self.redirect(''.join(['/site/starting-points?p=', permalink]))
    
-    self.redirect('/')
 
 class AnythingHandler(webapp.RequestHandler):
   def get(self, path):
