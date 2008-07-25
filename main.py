@@ -10,6 +10,7 @@ def main():
                      ('/404.html', ibake.NotFoundHandler),
                      ('/site/starting-points', ibake.StartingPointsHandler),
                      ('/site/starting-points/', ibake.StartingPointsHandler),
+                     ('/(.*)/(.*)', ibake.ItemHandler),
                      ('/(.*)', ibake.AnythingHandler)], 
                     debug=True)
     wsgiref.handlers.CGIHandler().run(application)

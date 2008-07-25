@@ -15,7 +15,7 @@ Error: {{ error }}
 
 <ul>
 {% for item in items %}
-<li><a href="/{{ item.permalink }}">{{ item.name }}</a></li>
+<li><a href="/{{ item.parent_permalink }}/{{ item.permalink }}">{{ item.name }}</a></li>
 {% endfor %}
 </ul>
 

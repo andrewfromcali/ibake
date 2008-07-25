@@ -26,16 +26,18 @@ ibake is a publicly editable wiki of technology documentation, indexed over and 
 by different terms so you can always find what you need by what you already know.
 </p>
 
-<h3>Common Starting Points</h3>
+<h3>Starting Points</h3>
 <ul>
 {% for item in items %}
 <li><a href="/{{ item.permalink }}">{{ item.name }}</a></li>
 {% endfor %}
 </ul>
 
+<!--
 <h3>See All Starting Points</h3>
 <ul>
 <li><a href="/tag/mysql">By Alphabetical Order</a></li>
 <li><a href="/tag/mysql">By Popularity</a></li>
 </ul>
+-->
 {% endblock %}

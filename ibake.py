@@ -55,6 +55,25 @@ class StartingPointsHandler(webapp.RequestHandler):
       sp.put()
       self.redirect(''.join(['/site/starting-points?p=', permalink]))
    
+class ItemHandler(webapp.RequestHandler):
+  def get(self, parent, permalink):
+    query = db.Query(model.Item)
+    query.filter('parent_permalink =', parent)
+    query.filter('permalink =', permalink)
+    item = query.get()
+    if item:
+      render(self, 'views/items/details.html', {'item': item})   
+    else:
+      self.error(404)
+      render(self, 'views/_shared/404.html', {})
+  def post(self, parent, permalink):
+    query = db.Query(model.Item)
+    query.filter('parent_permalink =', parent)
+    query.filter('permalink =', permalink)
+    item = query.get()
+    
+    link=self.request.get('l').strip()
+     
 
 class AnythingHandler(webapp.RequestHandler):
   def get(self, path):

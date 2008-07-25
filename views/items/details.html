@@ -1,0 +1,14 @@
+{% extends "../_shared/base.html" %}
+
+{% block content %}
+<h3><a href="/{{ item.parent_permalink }}">{{ item.parent_permalink }}</a>/{{ item.name }}</h3>
+
+<form method="post">
+Add link to other ibake reference:
+<br/>
+<input type="text" name="l" size="40"/>
+<br/>
+<input type="submit" value="Add Link"/>
+</form>
+
+{% endblock %}
