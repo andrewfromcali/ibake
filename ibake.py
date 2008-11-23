@@ -74,8 +74,8 @@ class ItemHandler(webapp.RequestHandler):
     
     link=self.request.get('l').strip()
     if len(link) > 0:
-      
-     
+      return
+    
 
 class AnythingHandler(webapp.RequestHandler):
   def get(self, path):
