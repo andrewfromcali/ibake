@@ -73,6 +73,8 @@ class ItemHandler(webapp.RequestHandler):
     item = query.get()
     
     link=self.request.get('l').strip()
+    if len(link) > 0:
+      
      
 
 class AnythingHandler(webapp.RequestHandler):
