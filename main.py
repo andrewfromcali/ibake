@@ -1,19 +1,35 @@
-import wsgiref.handlers
+# main.py
 
-from google.appengine.ext import webapp
+import os, sys
+os.environ["DJANGO_SETTINGS_MODULE"] = "ibake.settings"
 
-import ibake
+# Google App Engine imports.
+from google.appengine.ext.webapp import util
+
+# Force Django to reload its settings.
+from django.conf import settings
+settings._target = None
+
+import django.core.handlers.wsgi
+import django.core.signals
+import django.db
+import django.dispatch.dispatcher
+
+# Log errors.
+#django.dispatch.dispatcher.connect(
+#   log_exception, django.core.signals.got_request_exception)
+
+# Unregister the rollback event handler.
+django.dispatch.dispatcher.disconnect(
+django.db._rollback_on_exception,
+django.core.signals.got_request_exception)
 
 def main():
-    application = webapp.WSGIApplication(
-                    [('/*$', ibake.RootHandler),
-                     ('/404.html', ibake.NotFoundHandler),
-                     ('/site/starting-points', ibake.StartingPointsHandler),
-                     ('/site/starting-points/', ibake.StartingPointsHandler),
-                     ('/(.*)/(.*)', ibake.ItemHandler),
-                     ('/(.*)', ibake.AnythingHandler)], 
-                    debug=True)
-    wsgiref.handlers.CGIHandler().run(application)
+    # Create a Django application for WSGI.
+    application = django.core.handlers.wsgi.WSGIHandler()
+
+    # Run the WSGI CGI handler with that application.
+    util.run_wsgi_app(application)
 
 if __name__ == "__main__":
     main()
