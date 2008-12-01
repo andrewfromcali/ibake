@@ -1,22 +1,32 @@
 from django.shortcuts import render_to_response
 from django.http import HttpResponseRedirect, HttpResponse
 from django import forms
+from ibake.models import Item
 
+class ItemField(forms.Field):
+    def clean(self, value):
+        if not value:
+            raise forms.ValidationError('This field is required.')
+        value = value.strip()
+        if len(value) == 0: 
+            raise forms.ValidationError('This field is required.')
+        if len(value) > 50:
+            raise forms.ValidationError('This field is over 50 characters.')
+
+        return value
+        
 class ContactForm(forms.Form):
-    subject = forms.CharField(max_length=100)
-    message = forms.CharField()
-    sender = forms.EmailField()
-    cc_myself = forms.BooleanField(required=False)
+    item = ItemField()
     
 def main(request):
-    if request.method == 'POST': # If the form has been submitted...
-        form = ContactForm(request.POST) # A form bound to the POST data
-        if form.is_valid(): # All validation rules pass
-            # Process the data in form.cleaned_data
-            # ...
-            return HttpResponseRedirect('/thanks/') # Redirect after POST
+    if request.method == 'POST': 
+        form = ContactForm(request.POST) 
+        if form.is_valid():
+            item = form.cleaned_data['item']
+            
+            return HttpResponseRedirect('/') 
     else:
-        form = ContactForm() # An unbound form
+        form = ContactForm()
 
     return render_to_response('main/main.html', {
         'form': form,
