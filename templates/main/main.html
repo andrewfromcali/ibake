@@ -4,11 +4,16 @@
 
 welcome
 
-
-
 <form method="POST" action="/">
 {{ form.as_p }}
 <input type="submit"/>
 </form>
+
+<h3>Starting Points</h3>
+<ul>
+{% for item in items %}
+<li><a href="/{{ item.permalink }}">{{ item.name }}</a></li>
+{% endfor %}
+</ul>
 
 {% endblock %}
