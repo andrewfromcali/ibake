@@ -34,10 +34,16 @@ def main(request):
     else:
         form = ContactForm()
 
-    query = Item.all()
+    parts = request.path.split('/')
+    size = len(parts)
+    
+    query = db.Query(Item)
+    query.filter('parent_permalink =', '-')
     query.order('permalink')
+    
 
     return render_to_response('main/main.html', {
         'form': form,
         'items': query.fetch(1000, 0),
+        'parts': parts[1],
     })

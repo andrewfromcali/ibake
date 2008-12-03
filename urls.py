@@ -15,5 +15,5 @@
 from django.conf.urls.defaults import *
 
 urlpatterns = patterns('',
-  (r"^$", "ibake.views.main"),
+  (r"^", "ibake.views.main"),
 )
